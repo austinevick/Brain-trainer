@@ -1,6 +1,7 @@
 package com.example.braintrainer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -27,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Button button2;
     Button button3;
     Button replayButton;
-
+    ConstraintLayout gameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +44,13 @@ public class MainActivity extends AppCompatActivity {
         scoreTextView = findViewById(R.id.scoreTextView);
         timerTextView = findViewById(R.id.displayTimerTextView);
         replayButton = findViewById(R.id.replayButton);
+        gameLayout = findViewById(R.id.gameLayout);
 
-        playAgain(findViewById(R.id.displayTimerTextView));
+        goButton.setVisibility(View.VISIBLE);
+        gameLayout.setVisibility(View.INVISIBLE);
+        //playAgain(findViewById(R.id.displayTimerTextView));
 
-        new CountDownTimer(5100, 1000) {
+        new CountDownTimer(30100, 1000) {
 
             @Override
             public void onTick(long millisUntilFinished) {
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void start(View view) {
         goButton.setVisibility(View.INVISIBLE);
+        playAgain(findViewById(R.id.displayTimerTextView));
+        gameLayout.setVisibility(View.VISIBLE);
     }
 
     public void chooseAnswer(View view) {
@@ -108,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
     public void playAgain(View view) {
         score = 0;
         numberOfQuestions = 0;
+        resultTextView.setText("");
         timerTextView.setText("30s");
         scoreTextView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
         newQuestions();
