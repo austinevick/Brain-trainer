@@ -3,6 +3,7 @@ package com.example.braintrainer;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -74,9 +75,11 @@ public class MainActivity extends AppCompatActivity {
     public void chooseAnswer(View view) {
         if (Integer.toString(locationOfCorrectAnswer).equals(view.getTag().toString())) {
             resultTextView.setText("Correct");
+            resultTextView.setTextColor(Color.parseColor("#008000"));
             score++;
         } else {
             resultTextView.setText("Wrong");
+            resultTextView.setTextColor(Color.parseColor("#FF0000"));
         }
         numberOfQuestions++;
         scoreTextView.setText(Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
@@ -84,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void newQuestions() {
-
         Random rand = new Random();
         int a = rand.nextInt(21);
         int b = rand.nextInt(21);
@@ -129,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 resultTextView.setText("Done!");
+                resultTextView.setTextColor(Color.parseColor("#000000"));
                 replayButton.setVisibility(View.VISIBLE);
             }
         }.start();
